@@ -1,0 +1,323 @@
+/*Lightbox image */
+body {
+  background-color: black;
+}
+
+.lightbox {
+  /* Default to hidden */
+  display: none;
+  /* Overlay entire screen */
+  position: fixed;
+  z-index: 99999999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* A bit of padding around image */
+  padding: 1em;
+  /* Translucent background */
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Unhide the lightbox when it's the target */
+.lightbox:target {
+  display: block;
+}
+
+.lightbox span {
+  /* Full width and height */
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Size and position background image */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.card {
+  --color1: rgb(0, 231, 255);
+  --color2: rgb(255, 0, 231);
+  width: 320px;
+  height: 446px;
+  background-color: #211799;
+  background-image: url(https://supapongai.com/wp-content/uploads/2021/05/Borreload-Savage-Dragon-Fullart.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 5%/3.5%;
+  box-shadow: -13px -13px 13px -15px var(--color1), 13px 13px 13px -15px var(--color2), 0 0 4px 2px rgba(255, 255, 255, 0.5), 0 35px 25px -15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  display: block;
+  vertical-align: middle;
+  margin: 20px 10px;
+  -webkit-animation: holoCard 15s ease infinite;
+  animation: holoCard 15s ease infinite;
+  transform-origin: center;
+  z-index: 10;
+  overflow: hidden;
+  transform: translate3d(0, 0, -1px);
+}
+
+.card.charizard {
+  --color1: rgb(255, 148, 54);
+  --color2: rgb(255, 90, 144);
+}
+
+.card.sky {
+  --color1: #ffdf35;
+  --color2: #65f0ff;
+  background-image: url(https://supapongai.com/wp-content/uploads/2021/05/Sky-Striker-Hayate-Fullart.png);
+}
+
+.card.blue {
+  --color1: #eb8bff;
+  --color2: #7eeefa;
+  background-image: url(https://supapongai.com/wp-content/uploads/2021/05/Blue-Eyes-Alternative-Fullart.jpg);
+}
+
+.card.magic1 {
+  --color1: lightgreen;
+  --color2: #7eeefa;
+  background-image: url(https://i.pinimg.com/originals/e6/87/c9/e687c9b3dc0aeb62b6818663aa9df5db.png);
+}
+
+.card.magic2 {
+  --color1: #eb8bff;
+  --color2: #7eeefa;
+  background-image: url(https://c1.scryfall.com/file/scryfall-cards/large/front/2/c/2c3d5102-c305-4461-8360-534aba0f5c02.jpg?1572373433);
+}
+
+.card.magic3 {
+  --color1: lightgreen;
+  --color2: green;
+  background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a2567f67-8f25-4b8d-b430-1aaa5ab0ed42/ddg91ue-0f172910-a2d3-4f4a-b5bd-bcd87add0126.png/v1/fill/w_680,h_950,strp/nissa__who_shakes_the_world_by_asapproxies_ddg91ue-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD05NTAiLCJwYXRoIjoiXC9mXC9hMjU2N2Y2Ny04ZjI1LTRiOGQtYjQzMC0xYWFhNWFiMGVkNDJcL2RkZzkxdWUtMGYxNzI5MTAtYTJkMy00ZjRhLWI1YmQtYmNkODdhZGQwMTI2LnBuZyIsIndpZHRoIjoiPD02ODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.hOlkTYYvNn6498FXCe_ouc8bHkdSG_56a9aeDFT1XBg);
+}
+
+.card > span {
+  position: relative;
+  top: 45%;
+}
+
+.card:before,
+.card:after {
+  content: "";
+  opacity: 0.1;
+  mix-blend-mode: screen;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+}
+
+.card:before {
+  background-position: 50% 50%;
+  background-size: 300% 300%;
+  -webkit-animation: holoGradient 15s ease infinite both;
+  animation: holoGradient 15s ease infinite both;
+  background-image: linear-gradient(115deg, transparent 0%, var(--color1) 30%, transparent 47.5%, transparent 52.5%, var(--color2) 70%, transparent 100%);
+}
+
+.card:after {
+  opacity: 1;
+  background-image: url("https://assets.codepen.io/13471/sparkles.gif");
+  background-position: center;
+  background-size: 160%;
+  z-index: 2;
+  -webkit-animation: holoSparkle 15s ease infinite both;
+  animation: holoSparkle 15s ease infinite both;
+  filter: brightness(1);
+  transition: filter 0.5s ease;
+}
+
+.card.active {
+  -webkit-animation: none;
+  animation: none;
+}
+
+.card.active:before {
+  opacity: 1;
+  -webkit-animation: none;
+  animation: none;
+  transition: none;
+  background-image: linear-gradient(115deg, transparent 30%, var(--color1) 48%, var(--color2) 53%, transparent 70%);
+  filter: opacity(0.66);
+  mix-blend-mode: screen;
+}
+
+.card.active:before,
+.card.active:after {
+  -webkit-animation: none;
+  animation: none;
+}
+
+.card.active:after {
+  filter: brightness(2.5);
+  mix-blend-mode: screen;
+}
+
+.demo .card:nth-of-type(1),
+.demo .card:nth-of-type(2),
+.demo .card:nth-of-type(3) {
+  width: 124px;
+  height: 170px;
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.4), 0 25px 15px -10px rgba(0, 0, 0, 0.5);
+  -webkit-animation: none;
+  animation: none;
+}
+
+.demo .card:nth-of-type(1):before, .demo .card:nth-of-type(1):after,
+.demo .card:nth-of-type(2):before,
+.demo .card:nth-of-type(2):after,
+.demo .card:nth-of-type(3):before,
+.demo .card:nth-of-type(3):after {
+  -webkit-animation: none;
+  animation: none;
+  opacity: 1;
+}
+
+.demo .card:nth-of-type(1):before, .demo .card:nth-of-type(1):after {
+  display: none;
+}
+
+.demo .card:nth-of-type(2) {
+  background: none;
+}
+
+.demo .card:nth-of-type(2):before {
+  display: none;
+}
+
+.demo .card:nth-of-type(3) {
+  background: none;
+}
+
+.demo .card:nth-of-type(3):before {
+  background-position: center;
+}
+
+.demo .card:nth-of-type(3):after {
+  display: none;
+}
+
+.operator {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 45px;
+}
+
+@-webkit-keyframes holoSparkle {
+  0%, 5%, 100% {
+    opacity: 0.2;
+    background-position: 50% 50%;
+  }
+  33% {
+    opacity: 1;
+    background-position: 40% 40%;
+    filter: brightness(2);
+  }
+  45% {
+    opacity: 0.4;
+  }
+  66% {
+    opacity: 1;
+    background-position: 60% 60%;
+    filter: brightness(2);
+  }
+}
+@keyframes holoSparkle {
+  0%, 5%, 100% {
+    opacity: 0.2;
+    background-position: 50% 50%;
+  }
+  33% {
+    opacity: 1;
+    background-position: 40% 40%;
+    filter: brightness(2);
+  }
+  45% {
+    opacity: 0.4;
+  }
+  66% {
+    opacity: 1;
+    background-position: 60% 60%;
+    filter: brightness(2);
+  }
+}
+@-webkit-keyframes holoGradient {
+  0%, 100% {
+    opacity: 0.05;
+    background-position: 50% 50%;
+  }
+  33% {
+    background-position: 100% 100%;
+    opacity: 0.66;
+  }
+  66% {
+    background-position: 0% 0%;
+    opacity: 0.66;
+  }
+}
+@keyframes holoGradient {
+  0%, 100% {
+    opacity: 0.05;
+    background-position: 50% 50%;
+  }
+  33% {
+    background-position: 100% 100%;
+    opacity: 0.66;
+  }
+  66% {
+    background-position: 0% 0%;
+    opacity: 0.66;
+  }
+}
+@-webkit-keyframes holoCard {
+  0%, 100% {
+    transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+  }
+  33% {
+    transform: rotateZ(-10deg) rotateX(20deg) rotateY(-12deg);
+  }
+  66% {
+    transform: rotateZ(10deg) rotateX(-20deg) rotateY(12deg);
+  }
+}
+@keyframes holoCard {
+  0%, 100% {
+    transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+  }
+  33% {
+    transform: rotateZ(-10deg) rotateX(20deg) rotateY(-12deg);
+  }
+  66% {
+    transform: rotateZ(10deg) rotateX(-20deg) rotateY(12deg);
+  }
+}
+#app {
+  position: relative;
+}
+
+.demo,
+.cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 2000px;
+  position: relative;
+  z-index: 1;
+  transform: translate3d(0.1px, 0.1px, 0.1px);
+}
+
+.cards .card:nth-child(2), .cards .card:nth-child(2):before, .cards .card:nth-child(2):after {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.cards .card:nth-child(3), .cards .card:nth-child(3):before, .cards .card:nth-child(3):after {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
